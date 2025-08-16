@@ -9,6 +9,7 @@ import com.springdemo.springdatajpahomework.model.dto.response.BaseResponse;
 import com.springdemo.springdatajpahomework.model.dto.response.CustomerResponse;
 import com.springdemo.springdatajpahomework.model.dto.response.ListResponse;
 import com.springdemo.springdatajpahomework.service.CustomerService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<CustomerResponse>> createCustomer(@RequestBody CustomerRequest request){
+    public ResponseEntity<ApiResponse<CustomerResponse>> createCustomer(@RequestBody @Valid CustomerRequest request){
         return BaseResponse.success(customerService.create(request) , "Created customer successfully");
     }
 
@@ -43,7 +44,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customer-id}")
-    public ResponseEntity<ApiResponse<CustomerResponse>> updateCustomerById(@RequestParam @Min(1) Long id, @RequestBody CustomerRequest request){
+    public ResponseEntity<ApiResponse<CustomerResponse>> updateCustomerById(@RequestParam @Min(1) Long id, @RequestBody @Valid  CustomerRequest request){
         return BaseResponse.success(customerService.update(id,request),"Update customer successfully");
     }
 

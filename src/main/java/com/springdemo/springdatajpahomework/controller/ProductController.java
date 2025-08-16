@@ -9,6 +9,7 @@ import com.springdemo.springdatajpahomework.model.dto.response.ListResponse;
 import com.springdemo.springdatajpahomework.model.dto.response.ProductResponse;
 import com.springdemo.springdatajpahomework.repository.ProductRepository;
 import com.springdemo.springdatajpahomework.service.ProductService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductResponse>> createProduct(@RequestBody ProductRequest request){
+    public ResponseEntity<ApiResponse<ProductResponse>> createProduct(@RequestBody @Valid ProductRequest request){
         return BaseResponse.success(productService.create(request),"create Products successfully");
     }
 
@@ -44,7 +45,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<ApiResponse<ProductResponse>> updateProductById(@RequestParam @Min(1) Long id, @RequestBody ProductRequest request){
+    public ResponseEntity<ApiResponse<ProductResponse>> updateProductById(@RequestParam @Min(1) Long id, @RequestBody @Valid ProductRequest request){
         return BaseResponse.success(productService.updateById(id,request),"Update Products successfully");
     }
 

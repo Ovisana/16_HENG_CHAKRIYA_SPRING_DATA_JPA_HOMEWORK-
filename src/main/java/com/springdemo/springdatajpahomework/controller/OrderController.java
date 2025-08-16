@@ -9,6 +9,7 @@ import com.springdemo.springdatajpahomework.model.dto.response.BaseResponse;
 import com.springdemo.springdatajpahomework.model.dto.response.ListResponse;
 import com.springdemo.springdatajpahomework.model.dto.response.OrderResponse;
 import com.springdemo.springdatajpahomework.service.OrderService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@RequestParam @Min(1) Long id, @RequestBody List<OrderRequest> request){
+    public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@RequestParam @Min(1) Long id, @RequestBody @Valid List<OrderRequest> request){
         return BaseResponse.success(orderService.createOrder(id,request),"Create order successfully");
     }
 
