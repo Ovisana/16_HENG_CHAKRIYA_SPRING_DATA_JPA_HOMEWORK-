@@ -1,5 +1,6 @@
 package com.springdemo.springdatajpahomework.model;
 
+import com.springdemo.springdatajpahomework.model.dto.response.ProductResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,13 @@ public class Products {
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
     private String description;
+
+    public ProductResponse toResponse(){
+        return ProductResponse.builder()
+                .productId(this.productId)
+                .description(this.description)
+                .name(this.name)
+                .unitPrice(this.unitPrice)
+                .build();
+    }
 }
